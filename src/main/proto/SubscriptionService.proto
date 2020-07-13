@@ -1,0 +1,23 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.github.saiprasadkrishnamurthy.subscription;
+
+message SubscriptionScheme {
+    int64 subscriptionTimeInSeconds = 1;
+    int64 numberOfMessages = 2;
+}
+
+message SubscriptionRequest {
+    string id = 1;
+    string topic = 2;
+    SubscriptionScheme subscriptionScheme = 3;
+}
+
+message SubscriptionResponse {
+    string topic = 1;
+    string dataJson = 2;
+}
+
+service SubscriptionService {
+    rpc subscribe(SubscriptionRequest) returns (stream SubscriptionResponse);
+}
